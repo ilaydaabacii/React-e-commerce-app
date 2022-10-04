@@ -8,6 +8,8 @@ import alertify from "alertifyjs";
 import { Route, Switch} from 'react-router-dom';
 import notFound from './notFound';
 import CartList from './CartList';
+import Login from './Login';
+import Register from './Register';
 export default class App extends Component {
   state={currentCategory:"", products:[], cart: []}
   componentDidMount(){
@@ -64,6 +66,8 @@ addToCart= (product) => {
                 <Route exact path="/cart" render={
                   props => (<CartList {...props} cart={this.state.cart} removeFromCart={this.removeFromCart} />)
                 } />
+                <Route path="/login" component= {Login}></Route>
+                <Route path="/register" component= {Register}></Route>
                 <Route  Component={notFound} />
               </Switch>
               
