@@ -1,15 +1,15 @@
 
 import { Col, Container, Row } from 'reactstrap';
-import Navi from "./navi";
-import categories from "./categories";
-import product from './product';
+import Navi from "./components/navi";
+import categories from "./components/categories";
+import product from './components/product';
 import { Component } from 'react';
 import alertify from "alertifyjs";
 import { Route, Switch} from 'react-router-dom';
-import notFound from './notFound';
-import CartList from './CartList';
-import Login from './Login';
-import Register from './Register';
+import notFound from './components/notFound';
+import CartList from './components/CartList';
+import Login from './components/Login';
+import Register from './components/Register';
 export default class App extends Component {
   state={currentCategory:"", products:[], cart: []}
   componentDidMount(){
