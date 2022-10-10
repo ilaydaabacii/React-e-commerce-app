@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import { Button, Table } from 'reactstrap'
+import { connect } from 'react-redux';
+import {bindActionCreators} from "redux";
+import * as cartActions from "../../redux/actions/cartActions";
+import alertify from "alertifyjs"
 
-export default class CartList extends Component {
+class CartList extends Component {
+  removeFromCart(product){
+    this.props.action.removeFromCart(product);
+    alertify.error(product.productName + "sepetten silindi.")
+  }
   renderCart(){
     return(
         <Table striped>
@@ -25,8 +33,9 @@ export default class CartList extends Component {
                             <td>{cartItem.product.productName}</td>
                             <td>{cartItem.product.unitPrice}</td>
                             <td>{cartItem.product.unitsInStock}</td>
+                            <td>{cartItem.quantity}</td>
                             <td>
-                                <Button color="danger" onClick={()=>this.props.removeFromCart(cartItem.product)}>
+                                <Button color="danger" onClick={()=>this.removeFromCart(cartItem.product)}>
                                     Remove
                                 </Button>
                             </td>
@@ -45,3 +54,17 @@ export default class CartList extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch){
+  return {
+    actions: {
+      removeFromCart: bindActionCreators(cartActions.removeFromCart, dispatch)
+    }
+  }
+}
+function mapStateToProps(state){
+  return {
+    cart:state.cartReducer
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CartList)

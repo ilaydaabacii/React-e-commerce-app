@@ -8,10 +8,18 @@ import {
     NavItem,
     NavLink
   } from 'reactstrap';
-  import {Link} from "react-router-dom"
-  
+  import {Link} from "react-router-dom";
+  import { connect } from 'react-redux';
+  import {bindActionCreators} from "redux";
+  import * as cartActions from "../../redux/actions/cartActions";
+  import alertify from "alertifyjs"
+    
 
-export default class cartSummary extends Component {
+class cartSummary extends Component {
+  removeFromCart(product){
+    this.props.action.removeFromCart(product);
+    alertify.error(product.productName + "sepetten silindi.")
+  }
   renderSummary(){
     return (
         <UncontrolledDropdown nav inNavbar>
@@ -24,7 +32,7 @@ export default class cartSummary extends Component {
                         <DropdownItem key={cartItem.product.id}>
                         {cartItem.product.productName}
                         <Badge color="success">{cartItem.quantity}</Badge>
-                        <Badge color="danger" onClick={()=>this.props.removeFromCart(cartItem.product)}>X</Badge>
+                        <Badge color="danger" onClick={()=>this.removeFromCart(cartItem.product)}>X</Badge>
                         </DropdownItem>
                     ))
                 }
@@ -51,3 +59,17 @@ export default class cartSummary extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch){
+  return {
+    actions: {
+      removeFromCart: bindActionCreators(cartActions.removeFromCart, dispatch)
+    }
+  }
+}
+function mapStateToProps(state){
+  return {
+    cart:state.cartReducer
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(cartSummary)

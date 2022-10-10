@@ -10,6 +10,7 @@ import {
   NavLink,
   NavbarText,
 } from 'reactstrap';
+import CartSummary from '../cart/cartSummary';
 
 function Navi(args) {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,7 @@ function Navi(args) {
                 GitHub
               </NavLink>
             </NavItem>
-           <cartSummary removeFromCart={this.props.removeFromCart} cart={this.props.cart} />
+           <CartSummary removeFromCart={this.props.removeFromCart} cart={this.props.cart} />
           </Nav>
           <NavbarText>Simple Text</NavbarText>
         </Collapse>
