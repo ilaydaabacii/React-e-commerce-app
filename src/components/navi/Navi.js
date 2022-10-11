@@ -20,10 +20,15 @@ function Navi(args) {
   return (
     <div>
       <Navbar {...args}>
-        <NavbarBrand href="/">E-Commerce App</NavbarBrand>
+        <NavbarBrand><Link to="/">E-Commerce App</Link></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
+          <NavItem>
+              <NavLink>
+                <Link to="/saveproduct">Add to product</Link>
+              </NavLink>
+            </NavItem>
             <NavItem>
               <NavLink>
                 <Link to="login">Login</Link>
@@ -34,12 +39,7 @@ function Navi(args) {
                 <Link to="register">Register</Link>
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
-            </NavItem>
-           <CartSummary removeFromCart={this.props.removeFromCart} cart={this.props.cart} />
+           <CartSummary />
           </Nav>
           <NavbarText>Simple Text</NavbarText>
         </Collapse>
